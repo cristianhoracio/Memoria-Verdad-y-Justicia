@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Día de la Memoria, Verdad y Justicia(2)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+
+
+    <style>
+        :root {
+            --color-principal: #3f3131;
+            --color-secundario: #444;
+            --color-fondo-aside: rgba(230, 230, 230, 0.9);
+            --color-texto: #111;
+            --color-boton: #c42820;
+            --color-boton-hover: #a52a2a;
+            --radio-borde: 8px;
+            --radio-boton: 20px;
+            --fuente: 'Open Sans', 'Roboto', sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--fuente);
+            font-size: 18px;
+            margin: 0;
+            display: flex;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--color-principal);
+            color: white;
+            padding: 1em;
+            text-align: center;
+            width: 100%;
+            border-radius: var(--radio-borde);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1em;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        main {
+            flex: 3;
+            padding: 2em;
+            margin-left: 300px;
+        }
+
+        aside {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 100vh;
+            background-color: var(--color-fondo-aside);
+            padding: 1em;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            border-radius: var(--radio-borde);
+            overflow-y: auto;
+        }
+
+        aside ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        aside li {
+            margin: 0.5em 0;
+        }
+
+        aside a {
+            text-decoration: none;
+            color: var(--color-secundario);
+            transition: color 0.3s, font-weight 0.3s;
+        }
+
+        aside a:hover {
+            color: var(--color-texto);
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: var(--color-principal);
+            color: white;
+            text-align: center;
+            padding: 1em;
+            width: 100%;
+            border-radius: var(--radio-borde);
+        }
+
+        /* Centrar títulos */
+        section h2 {
+            text-align: center;
+        }
+
+        /* Centrar imagen y video */
+        .contenedor {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 1em 0;
+            text-align: center;
+        }
+
+        .contenedor img,
+        .contenedor iframe {
+            max-width: 90%;
+            border-radius: 10px;
+        }
+
+        .contenedor iframe {
+            width: 80%;
+            max-width: 700px;
+            aspect-ratio: 16 / 9;
+            height: auto;
+        }
+
+        /* Estilos tabla */
+        table.dictaduras {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 1em auto;
+            border-radius: var(--radio-borde);
+            overflow: hidden;
+            background-color: #fafafa;
+            font-size: 16px;
+        }
+
+        table.dictaduras th {
+            background-color: var(--color-principal);
+            color: white;
+            padding: 0.6em;
+            text-align: center;
+        }
+
+        table.dictaduras td {
+            padding: 0.5em;
+            border: 1px solid #666;
+            text-align: left;
+        }
+
+        table.dictaduras tr:nth-child(even) {
+            background-color: #f0f0f0;
+        }
+
+        tr.destacado {
+            background-color: #ffe0e0;
+            font-weight: bold;
+        }
+
+        .especial {
+            background-color: #ffe0e0;
+            padding: 1em;
+            margin-top: 1em;
+            border-left: 5px solid red;
+            border-radius: var(--radio-borde);
+        }
+
+        /* Galería responsiva */
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1em;
+            justify-items: center;
+            margin: 2em 0;
+        }
+
+        .galeria img {
+            width: 100%;
+            max-width: 250px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Links con Flexbox */
+        .fuentes {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1em;
+        }
+
+        .fuentes li {
+            margin: 0;
+        }
+
+        .fuentes a {
+            display: block;
+            padding: 0.5em 1em;
+            background-color: var(--color-boton);
+            color: white;
+            border-radius: var(--radio-boton);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .fuentes a:hover {
+            background-color: var(--color-boton-hover);
+        }
+
+        /* Media queries para aside responsivo */
+        @media (max-width: 768px) {
+            aside {
+                position: relative;
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                justify-content: center;
+                overflow-y: visible;
+            }
+
+            aside ul {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1em;
+            }
+
+            main {
+                margin-left: 0;
+                padding: 1em;
+            }
+        }
+    </style>
+
+
+</head>
+</head>
+
+<body>
+    <aside>
+
+        <h2>Indice</h2>
+        <ul>
+            <li><a href="#introduccion">Introducción</a></li>
+            <li><a href="#contexto-geopolitico">Contexto geopolítico</a></li>
+            <li><a href="#narrativa-oficial">Narrativa oficial</a></li>
+            <li><a href="#crimenes-dictadura">Crímenes de la dictadura</a></li>
+            <li><a href="#postura">Postura crítica</a></li>
+            <li><a href="#recursos">Recursos y organismos</a></li>
+            <li class="especial"><a href="#madres">Cómo empezaron las Madres de Plaza de Mayo</a></li>
+        </ul>
+    </aside>
+
+    <div style="flex:3; display:flex; flex-direction:column;">
+        <header>
+            <h1>Día de la Memoria, Verdad y Justicia</h1>
+            <nav>
+                <ul>
+                    <li><a href="#introduccion">Inicio</a></li>
+                    <li><a href="#contexto-geopolitico">Contexto</a></li>
+                    <li><a href="#narrativa-oficial">Narrativa</a></li>
+                    <li><a href="#postura">Postura</a></li>
+                    <li><a href="#recursos">Recursos</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section id="introduccion">
+                <h2>Introducción</h2>
+                <p>
+                    Cada 24 de marzo, en Argentina, se conmemora el Día de la Memoria, Verdad y Justicia.
+                    Esta fecha recuerda el golpe de Estado de 1976 que dio inicio a la dictadura cívico-militar,
+                    responsable de un plan sistemático de represión ilegal que incluyó desapariciones forzadas,
+                    torturas, apropiación de niños y persecución política.
+                </p>
+                <p>
+                    La jornada busca mantener viva la memoria de las víctimas, reafirmar el compromiso con la verdad
+                    y garantizar justicia frente a los crímenes de lesa humanidad. Es un día de reflexión colectiva,
+                    en el que la sociedad argentina se une para recordar y para decir: Nunca Más.
+                </p>
+                <div class="contenedor">
+
+                    <!-- Video embebido -->
+                    <iframe src="https://www.youtube.com/embed/E0iUGSyZzAs" title="Video de YouTube" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+
+                </div>
+
+
+            </section>
+
+
+            <section id="contexto-geopolitico">
+                <h2>Contexto geopolítico y regional</h2>
+                <p>
+                    La dictadura argentina de 1976 no fue un hecho aislado. En toda América Latina, durante las décadas
+                    de 1960 y 1970,
+                    se multiplicaron los regímenes militares que compartían una misma lógica: la Doctrina de Seguridad
+                    Nacional,
+                    impulsada en el marco de la Guerra Fría y promovida por Estados Unidos. Según esta doctrina, los
+                    gobiernos
+                    debían combatir al “enemigo interno”, identificado con movimientos sociales, sindicales,
+                    estudiantiles y políticos
+                    que cuestionaban el orden establecido.
+                </p>
+                <p>
+                    En Brasil, desde 1964, se había instaurado una dictadura militar que sirvió de modelo para otros
+                    países.
+                    En Chile, el golpe de 1973 contra Salvador Allende dio lugar al régimen de Augusto Pinochet,
+                    caracterizado por
+                    la represión masiva y el exilio de miles de personas. Uruguay vivió la suspensión de las
+                    instituciones democráticas
+                    en 1973, mientras que Paraguay permanecía bajo el prolongado gobierno de Alfredo Stroessner desde
+                    1954.
+                    Bolivia atravesó sucesivos golpes militares entre 1971 y 1982, y en Argentina el golpe de 1976
+                    consolidó
+                    un plan sistemático de terrorismo de Estado.
+                </p>
+                <p>
+                    Estos regímenes no actuaron de manera aislada. A través del <strong>Plan Cóndor</strong>, las
+                    dictaduras del Cono Sur
+                    coordinaron acciones represivas, compartieron información de inteligencia y persiguieron opositores
+                    más allá
+                    de las fronteras nacionales. Esta red transnacional de represión permitió secuestrar, desaparecer y
+                    asesinar
+                    militantes en distintos países, consolidando un entramado regional de terrorismo de Estado.
+                </p>
+
+                <h2>Dictaduras en América Latina (1960-1980)</h2>
+
+                <div class="contenedor">
+
+                    <table class="dictaduras">
+                        <thead>
+                            <tr>
+                                <th>País</th>
+                                <th>Inicio</th>
+                                <th>Fin</th>
+                                <th>Características principales</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Brasil</td>
+                                <td>1964</td>
+                                <td>1985</td>
+                                <td>Golpe militar, censura, represión política.</td>
+                            </tr>
+                            <tr>
+                                <td>Chile</td>
+                                <td>1973</td>
+                                <td>1990</td>
+                                <td>Golpe contra Allende, régimen de Pinochet, exilios masivos.</td>
+                            </tr>
+                            <tr>
+                                <td>Uruguay</td>
+                                <td>1973</td>
+                                <td>1985</td>
+                                <td>Suspensión de instituciones democráticas, persecución sindical.</td>
+                            </tr>
+                            <tr>
+                                <td>Paraguay</td>
+                                <td>1954</td>
+                                <td>1989</td>
+                                <td>Dictadura prolongada de Stroessner, represión sistemática.</td>
+                            </tr>
+                            <tr>
+                                <td>Bolivia</td>
+                                <td>1971</td>
+                                <td>1982</td>
+                                <td>Sucesivos golpes militares, inestabilidad política.</td>
+                            </tr>
+                            <tr class="destacado">
+                                <td>Argentina</td>
+                                <td>1976</td>
+                                <td>1983</td>
+                                <td>Plan sistemático de terrorismo de Estado, desapariciones forzadas.</td>
+                            </tr>
+
+                    </table>
+
+
+
+                </div>
+
+
+
+
+            </section>
+
+
+            <section id="narrativa-oficial">
+                <h2>La narrativa oficial del régimen</h2>
+                <p>
+                    Tras el golpe de Estado del 24 de marzo de 1976, la Junta Militar encabezada por Jorge Rafael Videla
+                    presentó el inicio del llamado <strong>Proceso de Reorganización Nacional</strong>. Este proyecto
+                    fue
+                    difundido como una cruzada moral destinada a “restaurar los valores esenciales del ser nacional” y
+                    a combatir la “subversión” que, según el discurso oficial, amenazaba la estabilidad del país.
+                </p>
+                <p>
+                    En sus primeros discursos, Videla justificó la toma del poder señalando que la democracia había sido
+                    corrompida por la demagogia y la violencia política. El régimen se presentó como garante de orden,
+                    disciplina y moralidad, prometiendo acabar con la corrupción y con el “vacío de poder” que, según
+                    ellos,
+                    había dejado el gobierno constitucional. La represión fue enmarcada como una “guerra” contra la
+                    delincuencia subversiva, ocultando que en realidad se trataba de un plan sistemático de terrorismo
+                    de Estado.
+                </p>
+                <p>
+                    Los documentos oficiales del Proceso declaraban caducos los mandatos de Isabel Perón y de las
+                    autoridades
+                    electas, y establecían objetivos como reorganizar la Nación, restablecer la economía y preservar los
+                    valores
+                    tradicionales. Sin embargo, detrás de esta retórica se desplegó una política de censura, persecución
+                    y
+                    desaparición forzada de miles de personas, que buscaba eliminar toda forma de oposición política y
+                    social.
+                </p>
+                <p>
+                    Esta narrativa oficial fue clave para legitimar la represión ante sectores de la sociedad y para
+                    construir
+                    un relato que justificara el accionar del Estado. Más adelante, en la transición democrática, esa
+                    visión
+                    alimentó la llamada <strong>teoría de los dos demonios</strong>, que intentaba equiparar la
+                    violencia
+                    de las organizaciones armadas con la violencia ejercida por el Estado, relativizando así la
+                    responsabilidad
+                    de la dictadura en los crímenes de lesa humanidad.
+                </p>
+
+                <div class="contenedor galeria">
+                    <img src="imagenes/dictadura.jpg" alt="dictadura">
+                    <img src="imagenes/videla.jpg" alt="Videla">
+                    <img src="imagenes/madres.jpg" alt="Madres de Plaza de Mayo">
+                    <img src="imagenes/madres_plaza.jpg" alt="Madres en Plaza de Mayo">
+                    <img src="imagenes/centro_detencion.jpg" alt="uno de los centros de detención">
+                    <img src="imagenes/fotos_desaparecidos.jpg" alt="imagenes de desaparecidos">
+                </div>
+
+            </section>
+
+            <section id="crimenes-dictadura">
+                <h2>Crímenes de la dictadura</h2>
+                <p>
+                    El autodenominado Proceso de Reorganización Nacional desplegó un plan sistemático de represión
+                    ilegal
+                    que constituyó crímenes de lesa humanidad. Estos delitos fueron cometidos de manera organizada y
+                    coordinada por las Fuerzas Armadas, las fuerzas de seguridad y sectores civiles cómplices.
+                </p>
+                <ul>
+                    <li><strong>Desapariciones forzadas:</strong> miles de personas fueron secuestradas y mantenidas en
+                        cautiverio clandestino, sin registro oficial ni acceso a la justicia.</li>
+                    <li><strong>Centros clandestinos de detención:</strong> funcionaron en todo el país, donde se
+                        aplicaron torturas físicas y psicológicas de manera sistemática.</li>
+                    <li><strong>Apropiación de niños y niñas:</strong> hijos de personas desaparecidas fueron entregados
+                        ilegalmente a familias vinculadas al régimen, negándoles su identidad.</li>
+                    <li><strong>Asesinatos y ejecuciones extrajudiciales:</strong> opositores políticos y sociales
+                        fueron asesinados sin juicio ni garantías legales.</li>
+                    <li><strong>Censura y persecución cultural:</strong> se prohibieron libros, obras de teatro,
+                        canciones y se persiguió a artistas e intelectuales.</li>
+                    <li><strong>Exilio forzado:</strong> miles de argentinos debieron abandonar el país para salvar sus
+                        vidas, generando una diáspora marcada por el miedo y la violencia.</li>
+                    <li><strong>Violencia sexual como método de tortura:</strong> utilizada en los centros clandestinos
+                        para humillar y quebrar a las víctimas.</li>
+                </ul>
+                <p>
+                    Estos crímenes no fueron excesos aislados, sino parte de un plan deliberado y sistemático que
+                    buscaba
+                    eliminar toda forma de oposición política y social. La memoria de estas violaciones a los derechos
+                    humanos
+                    es fundamental para sostener el reclamo de verdad y justicia.
+                </p>
+            </section>
+
+
+            <section id="postura">
+                <h2>Contra la teoría de los dos demonios</h2>
+                <p>
+                    Durante los primeros años de la democracia, se instaló la llamada <strong>teoría de los dos
+                        demonios</strong>,
+                    que intentaba equiparar la violencia de las organizaciones armadas con la violencia ejercida por el
+                    Estado
+                    durante la dictadura. Este relato buscaba relativizar la responsabilidad del régimen militar,
+                    presentando
+                    la represión como una respuesta a un conflicto entre dos fuerzas equivalentes.
+                </p>
+                <p>
+                    Sin embargo, la historia y la justicia demostraron que esta teoría es falsa y profundamente injusta.
+                    No existieron dos bandos con igual poder: existió un Estado que, con todos los recursos de sus
+                    fuerzas
+                    armadas y de seguridad, desplegó un plan sistemático de terrorismo de Estado contra la sociedad
+                    civil.
+                    Las víctimas no fueron solamente militantes armados, sino también estudiantes, trabajadores,
+                    artistas,
+                    periodistas, sindicalistas y ciudadanos comunes que fueron perseguidos por pensar distinto.
+                </p>
+                <p>
+                    El sufrimiento de la sociedad argentina fue inmenso. Miles de familias quedaron desgarradas por la
+                    desaparición de sus seres queridos, y el miedo se instaló en cada espacio de la vida cotidiana.
+                    En ese contexto, las <strong>Madres de Plaza de Mayo</strong> se convirtieron en símbolo de
+                    resistencia
+                    y dignidad. Con sus pañuelos blancos, comenzaron a marchar cada jueves en la Plaza de Mayo para
+                    exigir
+                    la aparición con vida de sus hijos. Su lucha, sostenida en el tiempo, fue clave para visibilizar los
+                    crímenes y para mantener viva la memoria.
+                </p>
+                <p>
+                    Los juicios por delitos de lesa humanidad, iniciados en la década de 1980 y retomados con fuerza a
+                    partir
+                    de 2003, confirmaron la existencia de un plan sistemático de represión ilegal. Las sentencias
+                    judiciales
+                    establecieron que las desapariciones, las torturas y las apropiaciones de niños fueron crímenes de
+                    lesa
+                    humanidad, imprescriptibles y no comparables con ningún otro tipo de violencia política.
+                </p>
+                <p>
+                    La memoria colectiva, la lucha de los organismos de derechos humanos y las decisiones de la justicia
+                    argentina han dejado claro que no hubo “dos demonios”. Hubo un Estado que utilizó el aparato
+                    represivo
+                    para sembrar el terror y eliminar toda forma de oposición. Recordar este sufrimiento y reivindicar
+                    la
+                    lucha de las Madres y Abuelas de Plaza de Mayo es esencial para sostener el compromiso con el
+                    <strong>Nunca Más</strong>.
+                </p>
+            </section>
+
+
+            <section id="recursos">
+                <h2>Organismos de derechos humanos y otras fuentes</h2>
+
+                <div class="contenedor">
+
+                    <ul class="fuentes">
+                        <li><a href="https://www.abuelas.org.ar/" target="_blank">Abuelas de Plaza de Mayo</a></li>
+                        <li><a href="https://www.madres.org/" target="_blank">Madres de Plaza de Mayo</a></li>
+                        <li><a href="https://www.cels.org.ar/" target="_blank">CELS</a></li>
+                        <li><a href="https://www.espaciomemoria.ar/" target="_blank">Espacio Memoria y Derechos Humanos
+                                (ex
+                                ESMA)</a></li>
+                        <li><a href="https://www.argentina.gob.ar/derechoshumanos/memoria-verdad-y-justicia"
+                                target="_blank">Secretaría de Derechos Humanos de la Nación</a></li>
+                        <li><a href="https://www.argentina.gob.ar/derechoshumanos/archivo-nacional-de-la-memoria"
+                                target="_blank">Archivo Nacional de la Memoria</a></li>
+                        <li><a href="https://www.defensoria.org.ar/" target="_blank">Defensoría del Pueblo de la
+                                Nación</a>
+                        </li>
+                        <li><a href="https://www.argentina.gob.ar/derechoshumanos/museo-sitio-de-memoria-esma"
+                                target="_blank">Museo Sitio de Memoria ESMA</a></li>
+                        <li><a href="https://plancondor.org/?utm_source=copilot.com">Plan Condor</a></li>
+                    </ul>
+
+                </div>
+
+
+            </section>
+
+
+
+            <section id="madres" class="especial">
+                <h2>Cómo empezaron las Madres de Plaza de Mayo</h2>
+                <p>
+                    En 1977, en plena dictadura cívico-militar, un grupo de mujeres comenzó a reunirse en la Plaza de
+                    Mayo
+                    para exigir información sobre sus hijos e hijas desaparecidos. Eran madres que, frente al silencio
+                    oficial
+                    y la indiferencia social, decidieron transformar su dolor en acción colectiva.
+                </p>
+                <p>
+                    Al principio se encontraban de manera informal, caminando alrededor de la Pirámide de Mayo porque la
+                    policía
+                    les prohibía permanecer quietas. Ese gesto simple —dar vueltas en círculo— se convirtió en un
+                    símbolo de
+                    resistencia pacífica. Muy pronto adoptaron el <strong>pañuelo blanco</strong>, confeccionado con
+                    pañales de tela,
+                    como emblema de su lucha y de la memoria de sus hijos.
+                </p>
+                <p>
+                    Las Madres enfrentaron amenazas, persecuciones y hasta la desaparición de algunas de sus
+                    integrantes,
+                    pero nunca abandonaron la Plaza. Su persistencia logró visibilizar los crímenes del régimen y
+                    mantener viva
+                    la demanda de verdad y justicia en los años más oscuros de la represión.
+                </p>
+                <p>
+                    Con el tiempo, su lucha trascendió las fronteras de Argentina y se convirtió en referente mundial de
+                    resistencia pacífica frente al terrorismo de Estado. La justicia argentina reconoció la validez de
+                    sus
+                    reclamos, y la historia las consagró como protagonistas fundamentales en la construcción de la
+                    memoria
+                    colectiva. Gracias a ellas, el país aprendió que el dolor puede transformarse en fuerza y que la
+                    memoria
+                    es un compromiso irrenunciable.
+                </p>
+            </section>
+
+            <footer>
+                <p>© 2026 Cristian Aquino</p>
+                <p>
+                    Sitio dedicado a la memoria de las víctimas del terrorismo de Estado en Argentina.
+                    Recordar es un compromiso colectivo: <br><strong>Nunca Más</strong>.
+                </p>
+                <p>
+                    Inspirado en la lucha de las Madres y Abuelas de Plaza de Mayo, y en el trabajo
+                    de los organismos de derechos humanos que mantienen viva la verdad y la justicia.
+                </p>
+            </footer>
+
+
+
+</body>
